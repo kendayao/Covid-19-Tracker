@@ -5,7 +5,8 @@ import InfoBox from "./components/infobox/InfoBox";
 import Table from './components/table/Table';
 import {sortData} from './util';
 import LineGraph from './components/linegraph/LineGraph';
-import Map from './components/map/Map'
+import Map from './components/map/Map';
+import "leaflet/dist/leaflet.css";
 
 function App() {
 
@@ -13,6 +14,10 @@ function App() {
   const[country, setCountry]=useState('worldwide');
   const[countryInfo, setCountryInfo]=useState({});
   const[tableData, setTableData]=useState([])
+  const[mapCenter, setMapCenter]=useState({lat: 34.80746, lng:-40.4796})
+  const[mapZoom, setMapZoom]=useState(3)
+
+
 
   useEffect(()=>{
     const getCountriesData=async()=>{
@@ -77,7 +82,10 @@ function App() {
           <InfoBox title="Deaths" total={countryInfo.todayDeaths}  cases={countryInfo.deaths} /> 
         </div>
         <div className="app__map">
-          <Map />
+          <Map  
+            center={mapCenter}
+            zoom={mapZoom}
+          />
         </div>
       </div>
       <Card className="app__right">
