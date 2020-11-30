@@ -5,7 +5,7 @@ import InfoBox from "./components/infobox/InfoBox";
 import Table from './components/table/Table';
 import {sortData} from './util';
 import LineGraph from './components/linegraph/LineGraph';
-
+import Map from './components/map/Map'
 
 function App() {
 
@@ -77,6 +77,7 @@ function App() {
           <InfoBox title="Deaths" total={countryInfo.todayDeaths}  cases={countryInfo.deaths} /> 
         </div>
         <div className="app__map">
+          <Map />
         </div>
       </div>
       <Card className="app__right">
