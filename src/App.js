@@ -16,10 +16,10 @@ function App() {
   const[countryInfo, setCountryInfo]=useState({});
   const[tableData, setTableData]=useState([]);
   const[mapCenter, setMapCenter]=useState([34.80746, -40.4796]);
+  // eslint-disable-next-line
   const[mapZoom, setMapZoom]=useState(3);
   const[mapCountries, setMapCountries]=useState([]);
   const[casesType, setCaseType]=useState("cases");
-
 
 
   useEffect(()=>{
@@ -71,7 +71,7 @@ function App() {
 
     })
   }
-
+console.log(mapCenter)
   return (
     <div className="app">
       <div className="app__left">
