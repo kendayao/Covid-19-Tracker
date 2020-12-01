@@ -10,11 +10,10 @@ const casesTypeColors={
     },
     recovered:{
         hex: "#7dd71d",
-        multiplier: 1200,
+        multiplier: 400,
     },
     deaths:{
         hex: "#fb4443",
- 
         multiplier: 2000,
     },
 }
@@ -49,12 +48,11 @@ export const showDataOnMap=(data, casesType="cases")=>{
                     </div>
                 </Popup>
 
-
             </Circle>
         ))
     )
 }
 
 export const prettyPrintStat=(stat)=>{
-   return stat? `+${numeral(stat).format("0.0a")}`:null;
+   return stat? `+${numeral(stat).format("0.0a")}`: "+0";
 }
