@@ -88,9 +88,9 @@ console.log(countryInfo)
         </div>
 
         <div className="app__stats">
-          <InfoBox isRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title="Coronavirus Cases" total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
+          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title="Coronavirus Cases" total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
           <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title="Recovered" total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
-          <InfoBox isRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title="Deaths" total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
+          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title="Deaths" total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
         </div>
         <div className="app__map">
           <Map

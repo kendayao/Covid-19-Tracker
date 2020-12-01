@@ -8,7 +8,7 @@
 }
 
 .infoBox__cases {
-  color: #cc1034;
+  color: #7dd71d;
   font-weight: 600;
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
@@ -25,10 +25,18 @@
   border-top: 10px solid greenyellow;
 }
 
-.infoBox--red {
-  border-color: red;
+.infoBox--lightRed {
+  border-color: #fb4443;
 }
 
-.infoBox__cases--green {
-  color: lightgreen !important;
+.infoBox--darkRed {
+  border-color: #cc1034;
+}
+
+.infoBox__cases--lightRed {
+  color: #fb4443 !important;
+}
+
+.infoBox__cases--darkRed {
+  color: #cc1034 !important;
 }

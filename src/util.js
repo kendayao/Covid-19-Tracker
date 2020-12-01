@@ -5,7 +5,7 @@ import React from "react"
 
 const casesTypeColors={
     cases:{
-        hex: "#CC1034",
+        hex: "#fb4443",
         multiplier: 400,
     },
     recovered:{
@@ -13,7 +13,7 @@ const casesTypeColors={
         multiplier: 400,
     },
     deaths:{
-        hex: "#fb4443",
+        hex: "#CC1034",
         multiplier: 2000,
     },
 }
