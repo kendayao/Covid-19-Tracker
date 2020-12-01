@@ -84,7 +84,7 @@ function LineGraph({casesType="cases", ...props}){
         }
        fetchData();
     },[casesType])
-
+    // rgba(204, 16, 52, 0.80)
 
     return(
         <div className={props.className}>
@@ -94,8 +94,8 @@ function LineGraph({casesType="cases", ...props}){
                 data={{
                     datasets:[{
                         data: data,
-                        backgroundColor:"rgba(204, 16, 52, 0.80)",
-                        borderColor: "#CC1034"
+                        backgroundColor: casesType==="cases"? "#fb4443":(casesType==="recovered"?"#7dd71d":"#CC1034"),
+                        borderColor: casesType==="cases"? "#d02020":(casesType==="recovered"?"#6ebf1d":"#9a0d27")
                     }]
                 }}
             />
