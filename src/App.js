@@ -13,9 +13,11 @@ function App() {
   const[countries, setCountries]=useState([]);
   const[country, setCountry]=useState('worldwide');
   const[countryInfo, setCountryInfo]=useState({});
-  const[tableData, setTableData]=useState([])
-  const[mapCenter, setMapCenter]=useState({lat: 34.80746, lng:-40.4796})
-  const[mapZoom, setMapZoom]=useState(3)
+  const[tableData, setTableData]=useState([]);
+  const[mapCenter, setMapCenter]=useState([34.80746, -40.4796]);
+  const[mapZoom, setMapZoom]=useState(3);
+  const[mapCountries, setMapCountries]=useState([]);
+
 
 
 
@@ -32,17 +34,21 @@ function App() {
 
           const sortedData=sortData(data)
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries);
       })
     }
     getCountriesData();
   },[])
 
+
   useEffect(()=>{
     fetch("https://disease.sh/v3/covid-19/all").then(response=>response.json()).then(data=>{
       setCountryInfo(data)
     })
   },[])
+
+
 
   const onCountryChange=async (event)=>{
     const countryCode=event.target.value
@@ -53,10 +59,12 @@ function App() {
     await fetch(url).then(response=>response.json()).then(data=>{
       setCountry(countryCode);
       setCountryInfo(data);
+      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      setMapZoom(4);
     })
+  
   }
 
-  
   return (
     <div className="app">
       <div className="app__left">
@@ -82,7 +90,8 @@ function App() {
           <InfoBox title="Deaths" total={countryInfo.todayDeaths}  cases={countryInfo.deaths} /> 
         </div>
         <div className="app__map">
-          <Map  
+          <Map
+            countries={mapCountries}
             center={mapCenter}
             zoom={mapZoom}
           />
@@ -92,7 +101,7 @@ function App() {
           <CardContent>
             <h3>Live Cases by Country</h3>
             <Table countries={tableData}/>
-            <h3>Worldwide new cases<h6>(last 30 days)</h6></h3>
+            <h3>Worldwide new cases</h3>
             <LineGraph />
           </CardContent>
       </Card>
