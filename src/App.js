@@ -1,16 +1,17 @@
+// React Components and utils imports
 import React, {useState, useEffect} from "react"
-import { FormControl, MenuItem, Select, Card, CardContent } from '@material-ui/core';
 import './App.css';
 import InfoBox from "./components/infobox/InfoBox";
 import Table from './components/table/Table';
-import {sortData, prettyPrintStat} from './util';
 import LineGraph from './components/linegraph/LineGraph';
 import Map from './components/map/Map';
+import {sortData, prettyPrintStat} from './util';
+// Material UI, Leafletjs and numeral imports
+import { FormControl, MenuItem, Select, Card, CardContent } from '@material-ui/core';
 import "leaflet/dist/leaflet.css";
-import numeral from "numeral"
+import numeral, { localeData } from "numeral"
 
 function App() {
-
   const[countries, setCountries]=useState([]);
   const[country, setCountry]=useState('worldwide');
   const[countryInfo, setCountryInfo]=useState({});
@@ -21,8 +22,8 @@ function App() {
   const[mapCountries, setMapCountries]=useState([]);
   const[casesType, setCaseType]=useState("cases");
 
-
   useEffect(()=>{
+    // on component load, get all data info for all countries
     const getCountriesData=async()=>{
       await fetch("https://disease.sh/v3/covid-19/countries")
       .then((response)=>response.json())
@@ -33,7 +34,6 @@ function App() {
             value: country.countryInfo.iso2,
             countryId: country.countryInfo._id
           }));
-
           const sortedData=sortData(data)
           setTableData(sortedData);
           setMapCountries(data);
@@ -43,21 +43,18 @@ function App() {
     getCountriesData();
   },[])
 
-
   useEffect(()=>{
+    // on component load, get worldwide data.
     fetch("https://disease.sh/v3/covid-19/all").then(response=>response.json()).then(data=>{
       setCountryInfo(data)
     })
   },[])
 
-
-
+  // get data for selected country
   const onCountryChange=async (event)=>{
     const countryCode=event.target.value
-
     const url=countryCode==='worldwide'? 'https://disease.sh/v3/covid-19/all': 
     `https://disease.sh/v3/covid-19/countries/${countryCode}`
-
     await fetch(url).then(response=>response.json()).then(data=>{
       setCountry(countryCode);
       setCountryInfo(data);
@@ -66,12 +63,9 @@ function App() {
       }else{
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
       }
-          
-
-
     })
   }
-console.log(mapCenter)
+
   return (
     <div className="app">
       <div className="app__left">
@@ -92,9 +86,9 @@ console.log(mapCenter)
         </div>
 
         <div className="app__stats">
-          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title="New Coronavirus Cases Today" total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
-          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title="Reported Recovered Today" total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
-          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title="Reported Deaths Today" total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
+          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title={`New Coronavirus Cases Today (${country})`} total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
+          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title={`New Reported Recovered Today (${country})`} total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
+          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title={`New Reported Deaths Today (${country})`} total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
         </div>
         <div className="app__map">
           <Map
@@ -116,5 +110,4 @@ console.log(mapCenter)
     </div>
   );
 }
-
 export default App;
