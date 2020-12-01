@@ -40,12 +40,7 @@ npm install in order to install any dependencies
 
 ## Usage
 
-The deployed link will take you to the homepage. On the homepage, click on sign up to create and account or sign in to log in an existing account. You can log using the credentials below. Once logged in, you can click on the heart icon to like a photo, input on the comment field to comment on a photo, and click on the add photo button from the top dropdown menu to add your own photo.
-
-Public Login Credentials
-
-- email: cool_coder@email.com
-- password: 12341234
+The deployed link will take you to the homepage. The homepage will display worldwide new coronavirus cases, recovered, and deaths reported. Click on individual circles on the map or use the dropdown menu to show coronavirus data for a specific country.
 
 ## License
 
@@ -69,4 +64,4 @@ For any questions, please contact kendayao at kendayao@gmail.com
 
 Deployed application link: https://instagram-clone-bf736.web.app/
 
-<img src="public/instagram-clone.png" width="600" height="450">
+<img src="public/covid-tracker.png" width="800" height="400">
