@@ -30,7 +30,8 @@ function App() {
         const countries= data.map((country)=>(
           {
             name: country.country,
-            value: country.countryInfo.iso2
+            value: country.countryInfo.iso2,
+            countryId: country.countryInfo._id
           }));
 
           const sortedData=sortData(data)
@@ -60,14 +61,17 @@ function App() {
     await fetch(url).then(response=>response.json()).then(data=>{
       setCountry(countryCode);
       setCountryInfo(data);
-      countryCode === "worldwide"
-          ? setMapCenter([34.80746, -40.4796])
-          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      if(countryCode === "worldwide"){
+        setMapCenter([34.80746, -40.4796])
+      }else{
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      }
+          
 
 
     })
   }
-console.log(countryInfo)
+
   return (
     <div className="app">
       <div className="app__left">
@@ -81,16 +85,16 @@ console.log(countryInfo)
             >
             <MenuItem value="worldwide">Worldwide</MenuItem>
             {countries.map((country)=>(
-            <MenuItem value={country.value}>{country.name}</MenuItem>
+            <MenuItem key={country.countryId} value={country.value}>{country.name}</MenuItem>
             ))}
             </Select>
           </FormControl>
         </div>
 
         <div className="app__stats">
-          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title="Coronavirus Cases" total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
-          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title="Recovered" total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
-          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title="Deaths" total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
+          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title="New Coronavirus Cases Today" total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
+          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title="Reported Recovered Today" total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
+          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title="Reported Deaths Today" total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
         </div>
         <div className="app__map">
           <Map

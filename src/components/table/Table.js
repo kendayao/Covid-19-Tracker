@@ -5,8 +5,8 @@ import numeral from "numeral";
 function Table({countries}){
     return(
         <div className='table'>
-            {countries.map(({country, cases})=>(
-                <tr>
+            {countries.map(({countryInfo, country, cases})=>(
+                <tr key={countryInfo._id}>
                     <td>{country}</td>
                     <td><strong>{numeral(cases).format("0,0")}</strong></td>
                 </tr>

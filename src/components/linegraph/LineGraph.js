@@ -64,7 +64,6 @@ const buildChartData=(data, casesType="cases")=>{
         
     }
     return chartData;
-    
 }
 
 
