@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './LineGraph.css';
 import {Line} from 'react-chartjs-2';
-import numeral, { localeData } from "numeral"
+import numeral from "numeral"
 
 // chart config
 const options={

@@ -9,11 +9,11 @@ import {sortData, prettyPrintStat} from './util';
 // Material UI, Leafletjs and numeral imports
 import { FormControl, MenuItem, Select, Card, CardContent } from '@material-ui/core';
 import "leaflet/dist/leaflet.css";
-import numeral, { localeData } from "numeral"
+import numeral from "numeral"
 
 function App() {
   const[countries, setCountries]=useState([]);
-  const[country, setCountry]=useState('worldwide');
+  const[country, setCountry]=useState('Worldwide');
   const[countryInfo, setCountryInfo]=useState({});
   const[tableData, setTableData]=useState([]);
   const[mapCenter, setMapCenter]=useState([34.80746, -40.4796]);
@@ -53,12 +53,12 @@ function App() {
   // get data for selected country
   const onCountryChange=async (event)=>{
     const countryCode=event.target.value
-    const url=countryCode==='worldwide'? 'https://disease.sh/v3/covid-19/all': 
+    const url=countryCode==='Worldwide'? 'https://disease.sh/v3/covid-19/all': 
     `https://disease.sh/v3/covid-19/countries/${countryCode}`
     await fetch(url).then(response=>response.json()).then(data=>{
       setCountry(countryCode);
       setCountryInfo(data);
-      if(countryCode === "worldwide"){
+      if(countryCode === "Worldwide"){
         setMapCenter([34.80746, -40.4796])
       }else{
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
@@ -77,7 +77,7 @@ function App() {
               value={country}
               onChange={onCountryChange}
             >
-            <MenuItem value="worldwide">Worldwide</MenuItem>
+            <MenuItem value="Worldwide">Worldwide</MenuItem>
             {countries.map((country)=>(
             <MenuItem key={country.countryId} value={country.value}>{country.name}</MenuItem>
             ))}
@@ -86,9 +86,9 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title={`New Coronavirus Cases Today (${country})`} total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
-          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title={`New Reported Recovered Today (${country})`} total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
-          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title={`New Reported Deaths Today (${country})`} total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
+          <InfoBox isLightRed active={casesType==="cases"} onClick={()=>setCaseType('cases')} title={`Coronavirus Cases Today (${country})`} total={numeral(countryInfo.cases).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayCases)}/>
+          <InfoBox active={casesType==="recovered"} onClick={()=>setCaseType('recovered')} title={`Reported Recovered Today (${country})`} total={numeral(countryInfo.recovered).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
+          <InfoBox isDarkRed active={casesType==="deaths"} onClick={()=>setCaseType('deaths')} title={`Reported Deaths Today (${country})`} total={numeral(countryInfo.deaths).format("0.0a")}  cases={prettyPrintStat(countryInfo.todayDeaths)} /> 
         </div>
         <div className="app__map">
           <Map
