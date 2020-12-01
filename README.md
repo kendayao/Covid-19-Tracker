@@ -62,6 +62,6 @@ For any questions, please contact kendayao at kendayao@gmail.com
 
 ## Deployed Application URL
 
-Deployed application link: https://instagram-clone-bf736.web.app/
+Deployed application link: https://covid-19-tracker-8ed19.web.app/
 
 <img src="public/covid-tracker.png" width="800" height="400">
