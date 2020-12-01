@@ -3,7 +3,7 @@ import { FormControl, MenuItem, Select, Card, CardContent } from '@material-ui/c
 import './App.css';
 import InfoBox from "./components/infobox/InfoBox";
 import Table from './components/table/Table';
-import {sortData} from './util';
+import {sortData, prettyPrintStat} from './util';
 import LineGraph from './components/linegraph/LineGraph';
 import Map from './components/map/Map';
 import "leaflet/dist/leaflet.css";
@@ -62,8 +62,8 @@ function App() {
       setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
       setMapZoom(4);
     })
-  
   }
+  console.log(mapCenter)
 
   return (
     <div className="app">
@@ -85,9 +85,9 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Coronavirus Cases" total={countryInfo.cases}  cases={countryInfo.todayCases}/>
-          <InfoBox title="Recovered" total={countryInfo.recovered}  cases={countryInfo.todayRecovered} /> 
-          <InfoBox title="Deaths" total={countryInfo.todayDeaths}  cases={countryInfo.deaths} /> 
+          <InfoBox title="Coronavirus Cases" total={prettyPrintStat(countryInfo.cases)}  cases={prettyPrintStat(countryInfo.todayCases)}/>
+          <InfoBox title="Recovered" total={prettyPrintStat(countryInfo.recovered)}  cases={prettyPrintStat(countryInfo.todayRecovered)} /> 
+          <InfoBox title="Deaths" total={prettyPrintStat(countryInfo.todayDeaths)}  cases={prettyPrintStat(countryInfo.deaths)} /> 
         </div>
         <div className="app__map">
           <Map
