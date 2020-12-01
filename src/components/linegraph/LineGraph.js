@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './LineGraph.css';
 import {Line} from 'react-chartjs-2';
-import numeral from "numeral"
+import numeral, { localeData } from "numeral"
 
+// chart config
 const options={
     legend: {
         display: false,
@@ -58,20 +59,14 @@ const buildChartData=(data, casesType="cases")=>{
             }
             chartData.push(newDataPoint) 
         }
-        lastDataPoint=data[casesType][date];
-        
-        
-        
+        lastDataPoint=data[casesType][date];    
     }
     return chartData;
 }
 
-
-
 function LineGraph({casesType="cases", ...props}){
     const[data, setData]=useState({})
-
-
+    // on component load, get data for last thirty days
     useEffect(()=>{
         const fetchData=async()=>{
             await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=30')
@@ -83,7 +78,6 @@ function LineGraph({casesType="cases", ...props}){
         }
        fetchData();
     },[casesType])
-    // rgba(204, 16, 52, 0.80)
 
     return(
         <div className={props.className}>
@@ -99,7 +93,6 @@ function LineGraph({casesType="cases", ...props}){
                 }}
             />
             )}
-            
         </div>
     )
 }
