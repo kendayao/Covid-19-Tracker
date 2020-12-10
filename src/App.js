@@ -47,6 +47,10 @@ function App() {
     // on component load, get worldwide data.
     fetch("https://disease.sh/v3/covid-19/all").then(response=>response.json()).then(data=>{
       setCountryInfo(data)
+      if(window.outerWidth<480){
+        setMapCenter([38, -97])
+        setMapZoom(2)
+      }
     })
   },[])
 
@@ -65,7 +69,7 @@ function App() {
       }
     })
   }
-
+  
   return (
     <div className="app">
       <div className="app__left">

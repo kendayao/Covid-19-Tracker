@@ -40,3 +40,26 @@
 .infoBox__cases--darkRed {
   color: #cc1034 !important;
 }
+
+
+@media (max-width: 480px) {
+  .infoBox {
+    text-align: center;
+  }
+
+  .infoBox:not(:last-child) {
+    margin-right: 6px;
+  }
+
+  .infoBox__title{
+    font-size: 12px !important;
+  }
+
+  .infoBox__cases{
+    font-size: 1.2rem;
+  }
+
+  .infoBox__total {
+    font-size: 0.4rem !important;
+  }
+}
