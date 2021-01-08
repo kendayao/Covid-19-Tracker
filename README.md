@@ -64,4 +64,6 @@ For any questions, please contact kendayao at kendayao@gmail.com
 
 Deployed application link: https://covid-19-tracker-8ed19.web.app/
 
+Video demo link: https://giphy.com/gifs/gw0ktAwKk3PdDO7UXZ/fullscreen
+
 <img src="public/covid-tracker.png" width="800" height="400">
